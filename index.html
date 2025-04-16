@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloudyliu - UI设计师 & 产品经理</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome 图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 自定义Tailwind配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2C3E50',
+                        secondary: '#E67E22',
+                        light: '#ECF0F1',
+                        dark: '#1A202C'
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans SC', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-light text-dark">
+    <!-- 导航栏 -->
+    <nav class="fixed w-full bg-white/80 backdrop-blur-md shadow-sm z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-primary">Cloudyliu</a>
+            <div class="hidden md:flex space-x-6">
+                <a href="#about" class="text-dark hover:text-secondary transition">关于我</a>
+                <a href="#experience" class="text-dark hover:text-secondary transition">工作经历</a>
+                <a href="#projects" class="text-dark hover:text-secondary transition">项目经验</a>
+                <a href="#skills" class="text-dark hover:text-secondary transition">技能认证</a>
+                <a href="#contact" class="text-dark hover:text-secondary transition">联系方式</a>
+            </div>
+            <button class="md:hidden text-dark" id="mobile-menu-button">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+        <!-- 移动端菜单 -->
+        <div class="md:hidden hidden bg-white absolute w-full" id="mobile-menu">
+            <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
+                <a href="#about" class="text-dark hover:text-secondary transition py-2">关于我</a>
+                <a href="#experience" class="text-dark hover:text-secondary transition py-2">工作经历</a>
+                <a href="#projects" class="text-dark hover:text-secondary transition py-2">项目经验</a>
+                <a href="#skills" class="text-dark hover:text-secondary transition py-2">技能认证</a>
+                <a href="#contact" class="text-dark hover:text-secondary transition py-2">联系方式</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主体内容 -->
+    <main>
+        <!-- Hero部分 -->
+        <section class="min-h-screen flex items-center justify-center relative overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <img src="https://cdn.pixabay.com/photo/2025/03/31/15/31/mountains-9504977_1280.jpg?v=1" alt="背景" class="w-full h-full object-cover object-center opacity-40">
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent to-light"></div>
+            </div>
+            <div class="container mx-auto px-4 py-16 z-10 relative">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6 text-primary">Cloudyliu</h1>
+                    <p class="text-xl md:text-2xl mb-8 text-dark">UI设计 & 产品管理专家</p>
+                    <p class="text-lg mb-10 leading-relaxed">精通B端业务需求分析与设计，<br>10年经验打造卓越用户体验</p>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <a href="#projects" class="bg-secondary hover:bg-opacity-90 text-white font-medium py-3 px-6 rounded-lg transition">查看项目</a>
+                        <a href="#contact" class="border-2 border-primary hover:bg-primary hover:text-white text-primary font-medium py-3 px-6 rounded-lg transition">联系我</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 关于我 -->
+        <section id="about" class="py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row gap-12 items-center">
+                    <div class="md:w-1/2">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800" alt="个人照片" class="rounded-xl shadow-lg w-full max-w-md mx-auto">
+                    </div>
+                    <div class="md:w-1/2">
+                        <h2 class="text-3xl font-bold mb-6 text-primary">关于我</h2>
+                        <p class="mb-4 text-lg">UI设计师与产品经理，拥有10年工作经验（3年UI设计，7年软件产品与项目管理）。</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                            <div class="flex items-center">
+                                <i class="fas fa-user text-secondary mr-3"></i>
+                                <span>Cloudyliu | 女 | 33岁</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-graduation-cap text-secondary mr-3"></i>
+                                <span>杭州师范大学 | 电子商务</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt text-secondary mr-3"></i>
+                                <span>浙江嘉兴</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-briefcase text-secondary mr-3"></i>
+                                <span>10年工作经验</span>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3 text-primary">职业定位</h3>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-secondary mt-1 mr-3"></i>
+                                <span>精通B端业务需求分析与设计，具备敏锐的产品风格与用户体验洞察力</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-secondary mt-1 mr-3"></i>
+                                <span>掌握生产、BOM、订单、发货、质量及OA等核心业务流程</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-secondary mt-1 mr-3"></i>
+                                <span>迅速吸收新知识，高效拓展新业务</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-secondary mt-1 mr-3"></i>
+                                <span>卓越的跨部门沟通能力，有效解决项目挑战</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 工作经历 -->
+        <section id="experience" class="py-20 bg-light">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold mb-12 text-primary text-center">工作经历</h2>
+                <div class="max-w-4xl mx-auto">
+                    <div class="relative">
+                        <!-- 时间轴 -->
+                        <div class="absolute left-0 md:left-1/2 h-full w-0.5 bg-secondary transform md:translate-x-px"></div>
+                        
+                        <!-- 公司1 -->
+                        <div class="relative mb-16">
+                            <div class="flex flex-col md:flex-row items-start">
+                                <div class="md:w-1/2 md:pr-12 mb-6 md:mb-0">
+                                    <div class="md:text-right">
+                                        <h3 class="text-xl font-bold text-primary">上海因致科技信息有限公司</h3>
+                                        <p class="text-secondary font-medium">2015/08 - 至今</p>
+                                        <div class="hidden md:block mt-4 bg-white p-5 rounded-lg shadow-md">
+                                            <h4 class="font-semibold mb-2">产品经理 | 研发部</h4>
+                                            <ul class="text-sm space-y-2">
+                                                <li>• 监控行业趋势，识别市场痛点并提出创新解决方案</li>
+                                                <li>• 制定产品战略，收集市场数据，评估产品机会</li>
+                                                <li>• 编写需求文档，设计产品原型</li>
+                                                <li>• 协调开发、测试和设计团队，确保需求准确实施</li>
+                                                <li>• 制定推广计划，助力产品上市成功</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-center z-10 mx-auto md:mx-0">
+                                    <div class="w-10 h-10 bg-secondary rounded-full flex items-center justify-center">
+                                        <i class="fas fa-briefcase text-white"></i>
+                                    </div>
+                                </div>
+                                <div class="md:w-1/2 md:pl-12 md:hidden">
+                                    <div class="bg-white p-5 rounded-lg shadow-md">
+                                        <h4 class="font-semibold mb-2">产品经理 | 研发部</h4>
+                                        <ul class="text-sm space-y-2">
+                                            <li>• 监控行业趋势，识别市场痛点并提出创新解决方案</li>
+                                            <li>• 制定产品战略，收集市场数据，评估产品机会</li>
+                                            <li>• 编写需求文档，设计产品原型</li>
+                                            <li>• 协调开发、测试和设计团队，确保需求准确实施</li>
+                                            <li>• 制定推广计划，助力产品上市成功</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 公司2 -->
+                        <div class="relative mb-16">
+                            <div class="flex flex-col md:flex-row items-start">
+                                <div class="md:w-1/2 md:pr-12 mb-6 md:mb-0 order-1 md:order-1">
+                                    <div class="md:hidden">
+                                        <h3 class="text-xl font-bold text-primary">杭州百牛网络技术有限公司</h3>
+                                        <p class="text-secondary font-medium">2014/06 - 2015/07</p>
+                                        <div class="mt-4 bg-white p-5 rounded-lg shadow-md">
+                                            <h4 class="font-semibold mb-2">电商设计师 | 电商部</h4>
+                                            <p class="text-sm">主要从事淘宝天猫的店铺装修和详情制作，同时工作也涉及彩页制作，名片制作等设计相关工作。</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-center z-10 mx-auto md:mx-0 order-0 md:order-2">
+                                    <div class="w-10 h-10 bg-secondary rounded-full flex items-center justify-center">
+                                        <i class="fas fa-paint-brush text-white"></i>
+                                    </div>
+                                </div>
+                                <div class="md:w-1/2 md:pl-12 order-2 md:order-3">
+                                    <div class="hidden md:block">
+                                        <h3 class="text-xl font-bold text-primary">杭州百牛网络技术有限公司</h3>
+                                        <p class="text-secondary font-medium">2014/06 - 2015/07</p>
+                                        <div class="mt-4 bg-white p-5 rounded-lg shadow-md">
+                                            <h4 class="font-semibold mb-2">电商设计师 | 电商部</h4>
+                                            <p class="text-sm">主要从事淘宝天猫的店铺装修和详情制作，同时工作也涉及彩页制作，名片制作等设计相关工作。</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 公司3 -->
+                        <div class="relative">
+                            <div class="flex flex-col md:flex-row items-start">
+                                <div class="md:w-1/2 md:pr-12 mb-6 md:mb-0">
+                                    <div class="md:text-right">
+                                        <h3 class="text-xl font-bold text-primary">支付宝</h3>
+                                        <p class="text-secondary font-medium">2014/06 - 2015/07</p>
+                                        <div class="hidden md:block mt-4 bg-white p-5 rounded-lg shadow-md">
+                                            <h4 class="font-semibold mb-2">实习生 | 客户满意中心</h4>
+                                            <p class="text-sm">主要负责客户满意相关事宜，包括投诉处理，个人身份证认证升级审核等。</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-center z-10 mx-auto md:mx-0">
+                                    <div class="w-10 h-10 bg-secondary rounded-full flex items-center justify-center">
+                                        <i class="fas fa-credit-card text-white"></i>
+                                    </div>
+                                </div>
+                                <div class="md:w-1/2 md:pl-12 md:hidden">
+                                    <div class="bg-white p-5 rounded-lg shadow-md">
+                                        <h4 class="font-semibold mb-2">实习生 | 客户满意中心</h4>
+                                        <p class="text-sm">主要负责客户满意相关事宜，包括投诉处理，个人身份证认证升级审核等。</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 项目经验 -->
+        <section id="projects" class="py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold mb-12 text-primary text-center">项目经验</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- 项目1 -->
+                    <div class="bg-light rounded-xl shadow-md overflow-hidden transition-transform hover:transform hover:scale-105">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800" alt="智慧数据引擎" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-center mb-2">
+                                <h3 class="text-xl font-bold text-primary">智慧数据引擎</h3>
+                                <span class="text-xs text-white bg-secondary px-2 py-1 rounded">2024-2025</span>
+                            </div>
+                            <p class="text-sm mb-4">通过数据采集，规则运行等灵活驱动主数据收集填报业务，实现EBOM到MBOM转化，PLM、SAP、MDM等多系统的数据及业务协同</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded">产品改造</span>
+                                <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded">需求分析</span>
+                                <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded">功能开发</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 项目2 -->
+                    <div class="bg-light rounded-xl shadow-md overflow-hidden transition-transform hover:transform hover:scale-105">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1543286386-713bdd548da4?auto=format&fit=crop&q=80&w=800" alt="质量管理系统" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-center mb-2">
+                                <h3 class="text-xl font-bold text-primary">质量管理系统</h3>
+                                <span class="text-xs text-white bg-secondary px-2 py-1 rounded">2022-2023</span>
+                            </div>
+                            <p class="text-sm mb-4">基于BIQS和VDA X标准，为离散制造业设计的综合性质量管理系统，包含设计质量、供应商质量、制造质量、客户质量协同、质量控制等模块</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded">项目管理</span>
+                                <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded">新业务开发</span>
+                                <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded">团队协作</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 项目3 -->
+                    <div class="bg-light rounded-xl shadow-md overflow-hidden transition-transform hover:transform hover:scale-105">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&q=80&w=800" alt="云标签APP" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-center mb-2">
+                                <h3 class="text-xl font-bold text-primary">云标签APP</h3>
+                                <span class="text-xs text-white bg-secondary px-2 py-1 rounded">2022</span>
+                            </div>
+                            <p class="text-sm mb-4">响应移动互联网发展趋势，发布云标签APP，支持云端预览和打印标签，含Android端和IOS端</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded">移动应用</span>
+                                <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded">产品设计</span>
+                                <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded">用户反馈</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 项目4 -->
+                    <div class="bg-light rounded-xl shadow-md overflow-hidden transition-transform hover:transform hover:scale-105">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1556745757-8d76bdb6984b?auto=format&fit=crop&q=80&w=800" alt="订单&发货系统" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-center mb-2">
+                                <h3 class="text-xl font-bold text-primary">订单 & 发货系统</h3>
+                                <span class="text-xs text-white bg-secondary px-2 py-1 rounded">2020-2021</span>
+                            </div>
+                            <p class="text-sm mb-4">专注优化订单获取与发货流程，支持多种订单获取方式和差异化校验，适应各种发货场景，并实时监控发货状态</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded">业务流程</span>
+                                <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded">数据校验</span>
+                                <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded">实时监控</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 项目5 -->
+                    <div class="bg-light rounded-xl shadow-md overflow-hidden transition-transform hover:transform hover:scale-105">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=800" alt="家装企业管理系统" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-center mb-2">
+                                <h3 class="text-xl font-bold text-primary">家装企业管理系统</h3>
+                                <span class="text-xs text-white bg-secondary px-2 py-1 rounded">2024-至今</span>
+                            </div>
+                            <p class="text-sm mb-4">为跨国家装公司设计的综合性企业管理系统，涵盖商机管理、项目管理、采购、发运、仓库、实施、售后等业务</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded">需求调研</span>
+                                <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded">国际化</span>
+                                <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded">系统架构</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 项目6 -->
+                    <div class="bg-light rounded-xl shadow-md overflow-hidden transition-transform hover:transform hover:scale-105">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1483478550801-ceba5fe50e8e?auto=format&fit=crop&q=80&w=800" alt="智慧助手平台" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-center mb-2">
+                                <h3 class="text-xl font-bold text-primary">智慧助手平台</h3>
+                                <span class="text-xs text-white bg-secondary px-2 py-1 rounded">2023-2024</span>
+                            </div>
+                            <p class="text-sm mb-4">以"SAP主数据协同"为核心，通过规则服务配置实现EBOM至MBOM转化，促进跨部门数据一致性，适应汽车行业对敏捷响应的需求</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded">配置型系统</span>
+                                <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded">数据协同</span>
+                                <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded">汽车行业</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 技能认证 -->
+        <section id="skills" class="py-20 bg-light">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold mb-12 text-primary text-center">技能 & 认证</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-8 rounded-xl shadow-md">
+                        <h3 class="text-xl font-bold mb-6 text-primary flex items-center">
+                            <i class="fas fa-laptop-code text-secondary mr-3"></i>专业技能
+                        </h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="font-medium">UI/UX设计</span>
+                                    <span>90%</span>
+                                </div>
+                                <div class="w-full h-2 bg-gray-200 rounded-full">
+                                    <div class="h-full bg-secondary rounded-full" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="font-medium">需求分析与管理</span>
+                                    <span>95%</span>
+                                </div>
+                                <div class="w-full h-2 bg-gray-200 rounded-full">
+                                    <div class="h-full bg-secondary rounded-full" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="font-medium">项目管理</span>
+                                    <span>85%</span>
+                                </div>
+                                <div class="w-full h-2 bg-gray-200 rounded-full">
+                                    <div class="h-full bg-secondary rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="font-medium">产品策略规划</span>
+                                    <span>80%</span>
+                                </div>
+                                <div class="w-full h-2 bg-gray-200 rounded-full">
+                                    <div class="h-full bg-secondary rounded-full" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="font-medium">原型设计</span>
+                                    <span>92%</span>
+                                </div>
+                                <div class="w-full h-2 bg-gray-200 rounded-full">
+                                    <div class="h-full bg-secondary rounded-full" style="width: 92%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-8 rounded-xl shadow-md">
+                        <h3 class="text-xl font-bold mb-6 text-primary flex items-center">
+                            <i class="fas fa-certificate text-secondary mr-3"></i>资格认证
+                        </h3>
+                        <div class="space-y-6">
+                            <div class="flex">
+                                <div class="flex-shrink-0 h-12 w-12 bg-primary/10 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-project-diagram text-primary text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-semibold">PMP项目管理认证</h4>
+                                    <p class="text-sm text-gray-600">Project Management Professional</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="flex-shrink-0 h-12 w-12 bg-primary/10 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-cogs text-primary text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-semibold">信息系统项目管理师</h4>
+                                    <p class="text-sm text-gray-600">国家高级信息系统项目管理资格</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="flex-shrink-0 h-12 w-12 bg-primary/10 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-language text-primary text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-semibold">英语六级</h4>
+                                    <p class="text-sm text-gray-600">College English Test Band 6</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="flex-shrink-0 h-12 w-12 bg-primary/10 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-tools text-primary text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-semibold">专业工具掌握</h4>
+                                    <p class="text-sm text-gray-600">Sketch, Figma, Axure RP, Adobe XD, JIRA</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 联系方式 -->
+        <section id="contact" class="py-20 bg-white relative">
+            <div class="absolute inset-0 z-0 opacity-20">
+                <img src="https://images.unsplash.com/photo-1553484771-371a605b060b?auto=format&fit=crop&q=80&w=800" alt="背景" class="w-full h-full object-cover object-center">
+            </div>
+            <div class="container mx-auto px-4 relative z-10">
+                <h2 class="text-3xl font-bold mb-12 text-primary text-center">联系我</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                    <div class="bg-white p-6 rounded-xl shadow-md text-center flex flex-col items-center justify-center">
+                        <div class="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-phone text-secondary text-2xl"></i>
+                        </div>
+                        <h3 class="font-semibold mb-2">电话</h3>
+                        <p class="text-gray-600">18768144101</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-md text-center flex flex-col items-center justify-center">
+                        <div class="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-envelope text-secondary text-2xl"></i>
+                        </div>
+                        <h3 class="font-semibold mb-2">邮箱</h3>
+                        <p class="text-gray-600">liuqy199107@163.com</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-md text-center flex flex-col items-center justify-center">
+                        <div class="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-map-marker-alt text-secondary text-2xl"></i>
+                        </div>
+                        <h3 class="font-semibold mb-2">地址</h3>
+                        <p class="text-gray-600">浙江省嘉兴市</p>
+                    </div>
+                </div>
+                
+                <div class="mt-12 max-w-xl mx-auto bg-white p-8 rounded-xl shadow-md">
+                    <h3 class="text-xl font-bold mb-6 text-primary text-center">发送信息</h3>
+                    <form>
+                        <div class="mb-4">
+                            <label for="name" class="block mb-2 font-medium">姓名</label>
+                            <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary">
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="block mb-2 font-medium">邮箱</label>
+                            <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary">
+                        </div>
+                        <div class="mb-4">
+                            <label for="message" class="block mb-2 font-medium">信息</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-3 bg-secondary text-white font-medium rounded-lg hover:bg-opacity-90 transition">发送信息</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-primary text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h3 class="text-xl font-bold">Cloudyliu</h3>
+                    <p class="mt-2 text-sm">UI设计师 & 产品经理</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-white hover:text-secondary"><i class="fab fa-linkedin fa-lg"></i></a>
+                    <a href="#" class="text-white hover:text-secondary"><i class="fab fa-github fa-lg"></i></a>
+                    <a href="#" class="text-white hover:text-secondary"><i class="fab fa-behance fa-lg"></i></a>
+                    <a href="#" class="text-white hover:text-secondary"><i class="fab fa-weixin fa-lg"></i></a>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-sm">
+                <p>&copy; 2024 Cloudyliu. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端菜单切换
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // 滚动平滑效果
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                // 关闭移动端菜单
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html> 
