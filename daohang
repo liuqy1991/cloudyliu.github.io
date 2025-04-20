@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>飞书多维表格</title>
+    <style>
+        :root {
+            --primary-color: #3370ff;
+            --secondary-color: #f0f5ff;
+            --border-color: #e8e8e8;
+            --text-color: #333333;
+            --light-text: #666666;
+            --success-color: #52c41a;
+            --warning-color: #faad14;
+            --error-color: #f5222d;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --hover-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
+            background-color: #f7f8fa;
+            color: var(--text-color);
+            line-height: 1.6;
+            padding-bottom: 40px;
+        }
+        
+        .header {
+            padding: 24px 16px;
+            text-align: center;
+            background-color: white;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header h1 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+        
+        .header p {
+            font-size: 14px;
+            color: var(--light-text);
+        }
+        
+        .search-container {
+            max-width: 600px;
+            margin: 16px auto;
+            position: relative;
+            padding: 0 16px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 12px 40px 12px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            font-size: 15px;
+            background-color: white;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.2s;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(51, 112, 255, 0.2);
+        }
+        
+        .search-button {
+            position: absolute;
+            right: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+        
+        .search-button svg {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .dashboard {
+            padding: 16px;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--hover-shadow);
+        }
+        
+        .card-image {
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f5f7fa;
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover .card-image img {
+            transform: scale(1.05);
+        }
+        
+        .card-icon {
+            max-width: 80%;
+            max-height: 80%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover .card-icon {
+            transform: scale(1.05);
+        }
+        
+        .card-image-placeholder {
+            width: 100%;
+            height: 100%;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-text);
+            font-size: 14px;
+            flex-direction: column;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .card-content {
+            padding: 16px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        
+        .card-description {
+            font-size: 14px;
+            color: var(--light-text);
+            margin-bottom: 16px;
+            flex-grow: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.5;
+        }
+        
+        .card-link {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
+            transition: background-color 0.2s;
+        }
+        
+        .card-link:hover {
+            background-color: #2860e1;
+        }
+        
+        .card-footer {
+            padding: 12px 16px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fafafa;
+            font-size: 12px;
+            color: var(--light-text);
+        }
+
+        .debug-info {
+            color: #d32f2f;
+            font-size: 11px;
+            margin-top: 4px;
+            word-break: break-all;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--light-text);
+            font-size: 15px;
+        }
+        
+        .error {
+            margin: 24px auto;
+            max-width: 600px;
+            background-color: #fff1f0;
+            border: 1px solid #ffccc7;
+            border-radius: 8px;
+            padding: 16px;
+            color: var(--error-color);
+            text-align: center;
+        }
+        
+        .refresh-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 15px;
+            cursor: pointer;
+            margin: 24px auto;
+            display: block;
+            transition: background-color 0.3s;
+        }
+        
+        .refresh-btn:hover {
+            background-color: #2860e1;
+        }
+        
+        .footer {
+            text-align: center;
+            font-size: 13px;
+            color: var(--light-text);
+            margin-top: 40px;
+            padding: 16px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        @media (max-width: 640px) {
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .card-image {
+                height: 160px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>飞书多维表格</h1>
+        <p>数据卡片展示</p>
+    </header>
+    
+    <div class="search-container">
+        <input type="text" id="search-input" class="search-input" placeholder="搜索内容...">
+        <button class="search-button">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+        </button>
+    </div>
+    
+    <div class="dashboard">
+        <div id="loading" class="loading">正在加载数据，请稍候...</div>
+        <div id="error" class="error" style="display: none;"></div>
+        <div id="cards-container" class="cards-container"></div>
+        <button id="refresh-btn" class="refresh-btn" style="display: none;">刷新数据</button>
+    </div>
+    
+    <footer class="footer">
+        &copy; 2025 飞书多维表格查看器 - 基于阿里云函数计算服务
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 页面加载完成后自动获取数据
+            fetchAPIData('feishu-bitable');
+            
+            document.getElementById('refresh-btn').addEventListener('click', function() {
+                fetchAPIData('feishu-bitable');
+            });
+            
+            // 搜索功能
+            const searchInput = document.getElementById('search-input');
+            
+            document.querySelector('.search-button').addEventListener('click', function() {
+                const searchQuery = searchInput.value.trim().toLowerCase();
+                searchData(searchQuery);
+            });
+            
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    const searchQuery = searchInput.value.trim().toLowerCase();
+                    searchData(searchQuery);
+                }
+            });
+        });
+        
+        function searchData(query) {
+            if (query === '') return;
+            
+            const cards = document.querySelectorAll('.card');
+            let found = false;
+            
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    card.style.display = '';
+                    found = true;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            if (!found) {
+                alert('未找到匹配的内容');
+            }
+        }
+        
+        function fetchAPIData(endpoint) {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('error').style.display = 'none';
+            document.getElementById('cards-container').innerHTML = '';
+            document.getElementById('refresh-btn').style.display = 'none';
+            
+            // 请求API
+            fetch(`https://daohang-ykpggxxxaq.cn-hangzhou.fcapp.run/${endpoint}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('网络请求失败，状态码: ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('refresh-btn').style.display = 'block';
+                    
+                    if (data.error) {
+                        showError(data.error);
+                        return;
+                    }
+                    
+                    // 调试信息
+                    console.log("API返回数据:", data);
+                    if (data.data && data.data.items && data.data.items.length > 0) {
+                        console.log("第一条记录字段:", data.data.items[0].fields);
+                    }
+                    
+                    renderCards(data);
+                })
+                .catch(error => {
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('refresh-btn').style.display = 'block';
+                    showError('获取数据失败: ' + error.message);
+                });
+        }
+        
+        function showError(message) {
+            const errorElement = document.getElementById('error');
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+        
+        // 辅助函数：判断URL是否是有效链接
+        function isValidUrl(url) {
+            if (!url || typeof url !== 'string') return false;
+            url = url.trim();
+            return url.startsWith('http://') || url.startsWith('https://') || url.startsWith('//');
+        }
+        
+        function renderCards(data) {
+            const container = document.getElementById('cards-container');
+            container.innerHTML = '';
+            
+            // 检查API返回的数据结构
+            if (!data.data || !data.data.items || !Array.isArray(data.data.items) || data.data.items.length === 0) {
+                showError('未找到表格数据或数据格式不正确');
+                console.error("数据结构问题:", data);
+                return;
+            }
+            
+            const records = data.data.items;
+            
+            records.forEach((record, index) => {
+                if (!record.fields) {
+                    console.log(`记录 ${index} 没有fields字段`);
+                    return;
+                }
+                
+                const fields = record.fields;
+                console.log(`记录 ${index} 字段:`, fields);
+                
+                // 创建卡片
+                const card = document.createElement('div');
+                card.className = 'card';
+                
+                // 图片部分（专门从"图标"字段读取）
+                const imageContainer = document.createElement('div');
+                imageContainer.className = 'card-image';
+                
+                if (fields['图标'] && typeof fields['图标'] === 'string') {
+                    const img = document.createElement('img');
+                    img.src = fields['图标'];
+                    img.alt = fields['导航内容'] || '图标';
+                    img.className = 'card-icon';
+                    img.onerror = function() {
+                        this.onerror = null;
+                        const placeholder = document.createElement('div');
+                        placeholder.className = 'card-image-placeholder';
+                        placeholder.innerHTML = `图标加载失败<div class="debug-info">链接: ${fields['图标']}</div>`;
+                        this.parentNode.replaceChild(placeholder, this);
+                    };
+                    imageContainer.appendChild(img);
+                } else {
+                    const placeholder = document.createElement('div');
+                    placeholder.className = 'card-image-placeholder';
+                    
+                    // 显示可用字段
+                    const fieldNames = Object.keys(fields).join(', ');
+                    placeholder.innerHTML = `无图标<div class="debug-info">没有"图标"字段，可用字段: ${fieldNames}</div>`;
+                    
+                    imageContainer.appendChild(placeholder);
+                }
+                
+                card.appendChild(imageContainer);
+                
+                // 内容部分
+                const content = document.createElement('div');
+                content.className = 'card-content';
+                
+                // 标题（"导航内容"字段）
+                if (fields['导航内容'] && typeof fields['导航内容'] === 'string') {
+                    const title = document.createElement('h3');
+                    title.className = 'card-title';
+                    title.textContent = fields['导航内容'];
+                    content.appendChild(title);
+                } else {
+                    const title = document.createElement('h3');
+                    title.className = 'card-title';
+                    title.textContent = '无标题';
+                    content.appendChild(title);
+                }
+                
+                // 描述（"描述"字段）
+                if (fields['描述'] && typeof fields['描述'] === 'string') {
+                    const description = document.createElement('div');
+                    description.className = 'card-description';
+                    description.textContent = fields['描述'];
+                    content.appendChild(description);
+                }
+                
+                // 链接按钮（"跳转"字段）
+                if (fields['跳转'] && typeof fields['跳转'] === 'string' && isValidUrl(fields['跳转'])) {
+                    const link = document.createElement('a');
+                    link.className = 'card-link';
+                    link.href = fields['跳转'];
+                    link.target = '_blank';
+                    link.textContent = '访问网站';
+                    content.appendChild(link);
+                }
+                
+                card.appendChild(content);
+                
+                // 卡片底部
+                const footer = document.createElement('div');
+                footer.className = 'card-footer';
+                footer.textContent = `ID: ${record.record_id ? record.record_id.substring(0, 8) + '...' : '未知'}`;
+                
+                card.appendChild(footer);
+                
+                container.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html> 
